@@ -267,6 +267,12 @@
               <input type="text" id="rsvp-name" class="form-input" placeholder="Masalan: Sardorbek Rahimov" required>
             </div>
 
+            <!-- Gmail yoki Telefon raqam -->
+            <div class="form-group">
+              <label for="rsvp-contact" class="form-label">Gmail yoki Telefon raqamingiz</label>
+              <input type="text" id="rsvp-contact" class="form-input" placeholder="example@gmail.com yoki +998 90 123 45 67">
+            </div>
+
             <!-- Tashrif varianti -->
             <div class="form-group">
               <label class="form-label">Tashrifingizni tasdiqlang *</label>
@@ -288,6 +294,38 @@
               </div>
             </div>
 
+            <!-- Dres-kod rangini tanlash -->
+            <div class="form-group">
+              <label class="form-label">Kiyinish uchun tanlagan rangingiz (Dres-kod)</label>
+              <div class="rsvp-dress-options" id="rsvp-dress-options">
+                <label class="rsvp-dress-pill">
+                  <input type="radio" name="rsvp_dress_color" value="Champagne Gold" checked>
+                  <span class="pill-dot" style="background: #E8D8B8;"></span>
+                  <span>Champagne</span>
+                </label>
+                <label class="rsvp-dress-pill">
+                  <input type="radio" name="rsvp_dress_color" value="Soft Cream">
+                  <span class="pill-dot" style="background: #FAF3E8;"></span>
+                  <span>Cream</span>
+                </label>
+                <label class="rsvp-dress-pill">
+                  <input type="radio" name="rsvp_dress_color" value="Dusty Rose">
+                  <span class="pill-dot" style="background: #D8A49B;"></span>
+                  <span>Dusty Rose</span>
+                </label>
+                <label class="rsvp-dress-pill">
+                  <input type="radio" name="rsvp_dress_color" value="Sage Green">
+                  <span class="pill-dot" style="background: #A3B18A;"></span>
+                  <span>Sage Green</span>
+                </label>
+                <label class="rsvp-dress-pill">
+                  <input type="radio" name="rsvp_dress_color" value="Classic Navy/Black">
+                  <span class="pill-dot" style="background: #2B2D42;"></span>
+                  <span>Classic Dark</span>
+                </label>
+              </div>
+            </div>
+
             <!-- Mehmonlar soni -->
             <div class="form-group">
               <label for="rsvp-guests" class="form-label">Tashrif buyuruvchilar soni</label>
@@ -304,11 +342,63 @@
               <textarea id="rsvp-message" class="form-textarea" placeholder="Yangi oilaga samimiy tilaklaringizni yozing..."></textarea>
             </div>
 
-            <button type="submit" class="btn-submit-rsvp">
+            <button type="submit" class="btn-submit-rsvp" id="btn-submit-rsvp">
               <span>Yuborish</span>
               <span>✨</span>
             </button>
           </form>
+        </div>
+      </section>
+
+      <!-- TO'YONA & HADYA (TO'LOV TIZIMLARI) -->
+      <section class="section-block reveal-on-scroll" id="toyona-section">
+        <div class="section-header">
+          <span class="section-subtitle">Yangi Oila Jamg‘armasi</span>
+          <h2 class="section-title">To‘yona & Ezgu Hadya</h2>
+          <div class="ornament-divider">✦</div>
+        </div>
+
+        <div class="toyona-card">
+          <p class="toyona-desc">
+            Yangi qurilayotgan oilamizga o‘z ezgu hadyangiz yoki to‘yonangizni ulashmoqchi bo‘lsangiz, quyidagi qulay to‘lov ilovalari orqali yuborishingiz mumkin.
+          </p>
+
+          <!-- Karta raqami qutisi -->
+          <div class="card-display-box">
+            <div class="card-chip-row">
+              <span class="card-type-label">Humo / Uzcard</span>
+              <span class="card-holder-name cfg-card-holder">Sardorbek Rahimov</span>
+            </div>
+            <div class="card-number-text" id="card-number-text">8600 1234 5678 9010</div>
+            
+            <button type="button" class="btn-copy-card" id="btn-copy-card">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="copy-btn-text">Karta raqamini nusxalash</span>
+            </button>
+          </div>
+
+          <!-- To'lov Ilovalari Tugmalari -->
+          <div class="payment-apps-grid">
+            <a href="https://payme.uz" target="_blank" class="payment-app-btn btn-payme" title="Payme orqali to'lov">
+              <span class="pay-icon">🔹</span>
+              <span class="pay-name">Payme</span>
+            </a>
+            <a href="https://click.uz" target="_blank" class="payment-app-btn btn-click" title="Click orqali to'lov">
+              <span class="pay-icon">🟡</span>
+              <span class="pay-name">Click</span>
+            </a>
+            <a href="https://uzumbank.uz" target="_blank" class="payment-app-btn btn-uzum" title="Uzum Bank orqali to'lov">
+              <span class="pay-icon">🟣</span>
+              <span class="pay-name">Uzum Bank</span>
+            </a>
+            <a href="https://paynet.uz" target="_blank" class="payment-app-btn btn-paynet" title="Paynet orqali to'lov">
+              <span class="pay-icon">🟢</span>
+              <span class="pay-name">Paynet / Xazna</span>
+            </a>
+          </div>
         </div>
       </section>
 

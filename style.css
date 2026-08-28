@@ -1275,6 +1275,161 @@ body {
 }
 
 /* ==========================================================================
+   RSVP DRESS CODE PILLS
+   ========================================================================== */
+.rsvp-dress-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.rsvp-dress-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #FFFFFF;
+  border: 1px solid #E5DCD2;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  transition: var(--transition-smooth);
+}
+
+.rsvp-dress-pill input[type="radio"] {
+  display: none;
+}
+
+.rsvp-dress-pill .pill-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.rsvp-dress-pill:has(input[type="radio"]:checked) {
+  border-color: var(--gold-dark);
+  background: rgba(228, 211, 188, 0.35);
+  box-shadow: 0 2px 8px rgba(197, 168, 128, 0.3);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   TO'YONA & HADYA (PAYMENT APPS SECTION)
+   ========================================================================== */
+.toyona-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  padding: 26px 20px;
+  border: 1px solid rgba(228, 211, 188, 0.5);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.toyona-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.card-display-box {
+  background: linear-gradient(135deg, #2B2625 0%, #3D3534 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-sm);
+  padding: 20px 18px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 20px;
+  position: relative;
+  text-align: left;
+}
+
+.card-chip-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+
+.card-holder-name {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.card-number-text {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #FAF7F2;
+  margin-bottom: 14px;
+}
+
+.btn-copy-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  background: var(--gold-gradient);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(184, 150, 108, 0.3);
+  transition: var(--transition-smooth);
+}
+
+.btn-copy-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(184, 150, 108, 0.45);
+}
+
+/* Payment Apps Grid */
+.payment-apps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.payment-app-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 10px;
+  background: #FFFFFF;
+  border: 1px solid #E5DCD2;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.payment-app-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-payme:hover { border-color: #00CCCC; color: #009999; }
+.btn-click:hover { border-color: #F8B100; color: #D69700; }
+.btn-uzum:hover { border-color: #7000FF; color: #7000FF; }
+.btn-paynet:hover { border-color: #00B140; color: #00B140; }
+
+/* ==========================================================================
    SCROLL REVEAL ANIMATSIYALARI
    ========================================================================== */
 .reveal-on-scroll {

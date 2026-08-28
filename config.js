@@ -94,6 +94,19 @@ const WEDDING_CONFIG = {
     chatId: "8382609980"
   },
 
+  // To'yona & Hadya (To'lov tizimlari orqali sovg'a ulashish)
+  toyona: {
+    enabled: true,
+    title: "To‘yona & Ezgu Hadya",
+    subtitle: "Yangi oila jamg‘armasiga o‘z hissangizni qo‘shishni istasangiz, quyidagi karta orqali to‘yona yuborishingiz mumkin.",
+    cardHolder: "Sardorbek Rahimov",
+    cardNumber: "8600 1234 5678 9010",
+    cardNumberClean: "8600123456789010",
+    paymeUrl: "https://payme.uz",
+    clickUrl: "https://click.uz",
+    uzumUrl: "https://uzumbank.uz"
+  },
+
   // Fon musiqasi fayli yo'li
   music: {
     title: "Romantic Piano Melody",

@@ -39,7 +39,13 @@ function initApp() {
   // 10. RSVP Forma va Telegram Bot yuborish
   initRsvpForm();
 
-  // 11. Scroll Reveal animatsiyalari
+  // 11. To'yona to'lov tizimlari va karta nusxalash
+  initToyonaPayment();
+
+  // 12. Dres-kod interaktiv tanlov
+  initDressCodeInteractions();
+
+  // 13. Scroll Reveal animatsiyalari
   initScrollAnimations();
 }
 
@@ -549,6 +555,9 @@ function initNavigationLinks() {
 /* ==========================================================================
    10. RSVP FORMA & TELEGRAM BOT INTEGRATSIYASI
    ========================================================================== */
+/* ==========================================================================
+   10. RSVP FORMA & TELEGRAM BOT INTEGRATSIYASI
+   ========================================================================== */
 function initRsvpForm() {
   const form = document.getElementById('rsvp-form');
   const modalOverlay = document.getElementById('success-modal');
@@ -561,7 +570,9 @@ function initRsvpForm() {
 
     const submitBtn = form.querySelector('.btn-submit-rsvp');
     const name = document.getElementById('rsvp-name').value.trim();
+    const contact = document.getElementById('rsvp-contact')?.value.trim() || "Kiritilmadi";
     const attendance = form.querySelector('input[name="attendance"]:checked')?.value || "Albatta boraman";
+    const dressColor = form.querySelector('input[name="rsvp_dress_color"]:checked')?.value || "Keltirilmadi";
     const guestsCount = document.getElementById('rsvp-guests').value;
     const message = document.getElementById('rsvp-message').value.trim();
 
@@ -586,7 +597,9 @@ function initRsvpForm() {
     // Telegram Botga xabar yuborish formati (HTML rejimi - xatolarsiz)
     const textHtml = `💌 <b>Yangi RSVP Javobi:</b>\n\n` +
       `👤 <b>Mehmon:</b> ${escapeHtml(name)}\n` +
+      `📧/📞 <b>Bog‘lanish (Gmail/Tel):</b> ${escapeHtml(contact)}\n` +
       `✨ <b>Tashrif:</b> ${escapeHtml(attendance)}\n` +
+      `🎨 <b>Tanlangan Dres-kod:</b> ${escapeHtml(dressColor)}\n` +
       `👥 <b>Mehmonlar soni:</b> ${escapeHtml(guestsCount)}\n` +
       `💬 <b>Ezgu tilak:</b> ${escapeHtml(message || "—")}\n\n` +
       `⏰ <b>Vaqt:</b> ${new Date().toLocaleString('uz-UZ')}`;
@@ -608,14 +621,14 @@ function initRsvpForm() {
       } catch (err) {
         console.warn("Telegram API yuborishda xatolik (Lokal saqlanmoqda):", err);
       }
-    } else {
-      // LocalStorage ga saqlab qo'yish (Offline/Demo)
-      try {
-        const existing = JSON.parse(localStorage.getItem('wedding_rsvp_list') || '[]');
-        existing.push({ name, attendance, guestsCount, message, date: new Date().toISOString() });
-        localStorage.setItem('wedding_rsvp_list', JSON.stringify(existing));
-      } catch (e) {}
     }
+
+    // LocalStorage ga ham saqlab qo'yish
+    try {
+      const existing = JSON.parse(localStorage.getItem('wedding_rsvp_list') || '[]');
+      existing.push({ name, contact, attendance, dressColor, guestsCount, message, date: new Date().toISOString() });
+      localStorage.setItem('wedding_rsvp_list', JSON.stringify(existing));
+    } catch (e) {}
 
     // Formani tozalash va tugmani tiklash
     if (submitBtn) {
@@ -633,6 +646,67 @@ function initRsvpForm() {
       modalOverlay.classList.remove('active');
     });
   }
+}
+
+/* ==========================================================================
+   11. TO'YONA & TO'LOV TIZIMLARI (CARD COPY & PAYMENT APPS)
+   ========================================================================== */
+function initToyonaPayment() {
+  const cfg = WEDDING_CONFIG.toyona;
+  if (!cfg) return;
+
+  const cardHolderEl = document.querySelector('.cfg-card-holder');
+  const cardNumberEl = document.getElementById('card-number-text');
+  const btnCopyCard = document.getElementById('btn-copy-card');
+  const copyBtnText = document.getElementById('copy-btn-text');
+
+  if (cardHolderEl && cfg.cardHolder) cardHolderEl.textContent = cfg.cardHolder;
+  if (cardNumberEl && cfg.cardNumber) cardNumberEl.textContent = cfg.cardNumber;
+
+  if (btnCopyCard) {
+    btnCopyCard.addEventListener('click', () => {
+      const cleanNum = cfg.cardNumberClean || cfg.cardNumber.replace(/\s+/g, '');
+      navigator.clipboard.writeText(cleanNum).then(() => {
+        if (copyBtnText) {
+          copyBtnText.textContent = "Nusxalandi! ✨";
+          setTimeout(() => {
+            copyBtnText.textContent = "Karta raqamini nusxalash";
+          }, 2500);
+        }
+      }).catch(() => {
+        alert("Karta raqami: " + cleanNum);
+      });
+    });
+  }
+}
+
+/* ==========================================================================
+   12. DRESS CODE SWATCH INTERAKTIV TANLOV
+   ========================================================================== */
+function initDressCodeInteractions() {
+  const swatchItems = document.querySelectorAll('.swatch-item');
+  const rsvpDressOptions = document.querySelectorAll('input[name="rsvp_dress_color"]');
+
+  swatchItems.forEach(item => {
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => {
+      const name = item.querySelector('.swatch-name')?.textContent?.trim();
+      if (!name) return;
+
+      // RSVP dagi mos radioni belgilash
+      rsvpDressOptions.forEach(radio => {
+        if (radio.value.toLowerCase().includes(name.toLowerCase()) || name.toLowerCase().includes(radio.value.toLowerCase())) {
+          radio.checked = true;
+        }
+      });
+
+      // RSVP bo'limiga silliq o'tish
+      const rsvpSection = document.getElementById('rsvp-section');
+      if (rsvpSection) {
+        rsvpSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
 }
 
 function showSuccessModal() {
