@@ -425,7 +425,7 @@ function initCountdownTimer() {
 }
 
 /* ==========================================================================
-   7. KALENDARGA QO'SHISH (GOOGLE & APPLE CALENDAR)
+   7. KALENDARGA QO'SHISH (GOOGLE & APPLE/NATIVE CALENDAR)
    ========================================================================== */
 function initCalendarButtons() {
   const btnGoogle = document.getElementById('btn-calendar-google');
@@ -439,23 +439,24 @@ function initCalendarButtons() {
     return date.toISOString().replace(/-|:|\.\d\d\d/g, "");
   }
 
-  // Google Calendar URL
+  // Google Calendar URL (Android / Desktop / Web)
   if (btnGoogle) {
     const gTitle = encodeURIComponent(`${cfg.groom.name} & ${cfg.bride.name} — Nikoh To'yi`);
     const gDetails = encodeURIComponent(`Sizni ${cfg.groom.name} va ${cfg.bride.name}ning nikoh to'yiga taklif etamiz!\nManzil: ${cfg.venue.name}, ${cfg.venue.address}`);
     const gLocation = encodeURIComponent(`${cfg.venue.name}, ${cfg.venue.address}`);
     const gDates = `${formatGoogleDate(startDate)}/${formatGoogleDate(endDate)}`;
 
+    // Google Calendar direct intent / link
     btnGoogle.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gTitle}&dates=${gDates}&details=${gDetails}&location=${gLocation}`;
     btnGoogle.target = "_blank";
   }
 
-  // Apple / iCal .ics fayl generatsiyasi
+  // Apple & Android Native Calendar (.ics format - to'g'ridan-to'g'ri kalendar ilovasini ochadi)
   if (btnApple) {
     btnApple.addEventListener('click', (e) => {
       e.preventDefault();
 
-      const icsContent = [
+      const icsData = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
         "PRODID:-//Taklifnoma//Wedding Invitation//UZ",
@@ -472,13 +473,16 @@ function initCalendarButtons() {
         "END:VCALENDAR"
       ].join("\r\n");
 
-      const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+      // Safari/iOS va Android uchun to'g'ridan-to'g'ri ilovada ochish
+      const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.setAttribute('download', 'Nikoh-Toyi-Taklifnoma.ics');
+      link.href = url;
+      link.setAttribute('download', `${cfg.groom.shortName}-${cfg.bride.shortName}-Toy.ics`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      setTimeout(() => window.URL.revokeObjectURL(url), 2000);
     });
   }
 }
