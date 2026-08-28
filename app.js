@@ -575,13 +575,21 @@ function initRsvpForm() {
       submitBtn.textContent = "Yuborilmoqda...";
     }
 
-    // Telegram Botga xabar yuborish formati
-    const textMessage = `💌 *Yangi RSVP Javobi:*\n\n` +
-      `👤 *Mehmon:* ${name}\n` +
-      `✨ *Tashrif:* ${attendance}\n` +
-      `👥 *Mehmonlar soni:* ${guestsCount}\n` +
-      `💬 *Ezgu tilak:* ${message || "—"}\n\n` +
-      `⏰ *Vaqt:* ${new Date().toLocaleString('uz-UZ')}`;
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    // Telegram Botga xabar yuborish formati (HTML rejimi - xatolarsiz)
+    const textHtml = `💌 <b>Yangi RSVP Javobi:</b>\n\n` +
+      `👤 <b>Mehmon:</b> ${escapeHtml(name)}\n` +
+      `✨ <b>Tashrif:</b> ${escapeHtml(attendance)}\n` +
+      `👥 <b>Mehmonlar soni:</b> ${escapeHtml(guestsCount)}\n` +
+      `💬 <b>Ezgu tilak:</b> ${escapeHtml(message || "—")}\n\n` +
+      `⏰ <b>Vaqt:</b> ${new Date().toLocaleString('uz-UZ')}`;
 
     const tg = WEDDING_CONFIG.telegram;
 
@@ -593,8 +601,8 @@ function initRsvpForm() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             chat_id: tg.chatId,
-            text: textMessage,
-            parse_mode: 'Markdown'
+            text: textHtml,
+            parse_mode: 'HTML'
           })
         });
       } catch (err) {

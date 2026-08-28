@@ -88,14 +88,10 @@ const WEDDING_CONFIG = {
   },
 
   // Telegram Bot sozlamalari (RSVP javoblarini olish uchun)
-  // Haqiqiy bot token va chat_id larni kiritishingiz mumkin:
   telegram: {
     enabled: true,
-    // Bot token: Masalan: "123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ"
-    // Bo'sh qoldirilsa tizim javobni chiroyli lokal simulyatsiya qiladi va saqlaydi
-    botToken: "", 
-    // Chat ID: Sizning profilingiz yoki guruhingiz ID si (masalan: "123456789")
-    chatId: ""
+    botToken: "8951161004:AAFu8OG4EYRINhKvAqk45mm5h0l0zf_cYHk", 
+    chatId: "8382609980"
   },
 
   // Fon musiqasi fayli yo'li
