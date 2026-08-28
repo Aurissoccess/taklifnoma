@@ -594,7 +594,7 @@ function initRsvpForm() {
         .replace(/>/g, '&gt;');
     }
 
-    // Telegram Botga xabar yuborish formati (HTML rejimi - xatolarsiz)
+    // Telegram Botga xabar yuborish formati (HTML va oddiy matn)
     const textHtml = `💌 <b>Yangi RSVP Javobi:</b>\n\n` +
       `👤 <b>Mehmon:</b> ${escapeHtml(name)}\n` +
       `📧/📞 <b>Bog‘lanish (Gmail/Tel):</b> ${escapeHtml(contact)}\n` +
@@ -604,22 +604,39 @@ function initRsvpForm() {
       `💬 <b>Ezgu tilak:</b> ${escapeHtml(message || "—")}\n\n` +
       `⏰ <b>Vaqt:</b> ${new Date().toLocaleString('uz-UZ')}`;
 
+    const plainText = `💌 Yangi RSVP Javobi:\n\n` +
+      `👤 Mehmon: ${name}\n` +
+      `📧/📞 Bog'lanish: ${contact}\n` +
+      `✨ Tashrif: ${attendance}\n` +
+      `🎨 Tanlangan Dres-kod: ${dressColor}\n` +
+      `👥 Mehmonlar soni: ${guestsCount}\n` +
+      `💬 Ezgu tilak: ${message || "—"}\n\n` +
+      `⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
+
     const tg = WEDDING_CONFIG.telegram;
 
     if (tg && tg.enabled && tg.botToken && tg.chatId) {
       try {
         const tgUrl = `https://api.telegram.org/bot${tg.botToken}/sendMessage`;
-        await fetch(tgUrl, {
+        const resp = await fetch(tgUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            chat_id: tg.chatId,
+            chat_id: String(tg.chatId),
             text: textHtml,
             parse_mode: 'HTML'
           })
         });
+        const data = await resp.json();
+        if (!data.ok) {
+          // Oddiy matn bilan qayta urinish
+          const fallbackUrl = `https://api.telegram.org/bot${tg.botToken}/sendMessage?chat_id=${encodeURIComponent(tg.chatId)}&text=${encodeURIComponent(plainText)}`;
+          await fetch(fallbackUrl);
+        }
       } catch (err) {
-        console.warn("Telegram API yuborishda xatolik (Lokal saqlanmoqda):", err);
+        console.warn("Fetch failed, sending via GET beacon:", err);
+        const beaconUrl = `https://api.telegram.org/bot${tg.botToken}/sendMessage?chat_id=${encodeURIComponent(tg.chatId)}&text=${encodeURIComponent(plainText)}`;
+        new Image().src = beaconUrl;
       }
     }
 
