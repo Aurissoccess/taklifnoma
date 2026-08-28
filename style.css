@@ -1,0 +1,1289 @@
+/* ==========================================================================
+   ROMANTIK & MINIMALIST TAKLIFNOMA — PREMIUM DESIGN SYSTEM (CSS)
+   ========================================================================== */
+
+/* Shriftlar va O'zgaruvchilar */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap');
+
+:root {
+  /* Pastel & Luxury Palette */
+  --bg-primary: #FAF7F2;
+  --bg-secondary: #F4EFEA;
+  --bg-card: rgba(255, 255, 255, 0.78);
+  --bg-card-hover: rgba(255, 255, 255, 0.92);
+  --bg-glass: rgba(250, 247, 242, 0.85);
+
+  /* Matn & Sarlavhalar */
+  --text-dark: #2B2625;
+  --text-muted: #6B625E;
+  --text-light: #948A85;
+
+  /* Accent & Oltin ranglar */
+  --gold-primary: #C5A880;
+  --gold-dark: #A68357;
+  --gold-light: #E4D3BC;
+  --gold-gradient: linear-gradient(135deg, #D6BA96 0%, #B8966C 50%, #E2CFB4 100%);
+  --rose-accent: #E5C3C0;
+  --rose-dark: #B58481;
+  --olive-accent: #A5AD96;
+  --seal-red: #A33835;
+  --seal-gradient: radial-gradient(circle at 35% 35%, #BE4643 0%, #8C2825 70%, #681714 100%);
+
+  /* Soyalar */
+  --shadow-sm: 0 4px 16px rgba(43, 38, 37, 0.04);
+  --shadow-md: 0 10px 30px rgba(184, 150, 108, 0.12);
+  --shadow-lg: 0 20px 50px rgba(43, 38, 37, 0.08);
+  --shadow-glow: 0 0 25px rgba(214, 186, 150, 0.4);
+
+  /* Shriftlar */
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Radius & Transition */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-full: 9999px;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Reset & Asosiy parametrlar */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-primary);
+  color: var(--text-dark);
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(229, 195, 192, 0.15) 0px, transparent 50%),
+    radial-gradient(at 90% 80%, rgba(197, 168, 128, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(244, 239, 234, 0.5) 0px, transparent 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Fon effekti — Atirgul barglari va nurlar canvas */
+#petals-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Mobile-First Konteyner */
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--bg-primary);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 481px) {
+  body {
+    background-color: #EDE7DF;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .app-container {
+    margin: 20px auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    min-height: calc(100vh - 40px);
+  }
+}
+
+/* ==========================================================================
+   1-BOSQICH: INTERAKTIV KIRISH QATLAM (INTRO GATE / ENVELOPE)
+   ========================================================================== */
+.intro-gate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(145deg, #FAF7F2 0%, #EDE6DC 100%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1), visibility 1s;
+}
+
+.intro-gate.opened {
+  opacity: 0;
+  transform: scale(1.08) translateY(-20px);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.intro-content {
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.intro-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-weight: 500;
+}
+
+.intro-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+/* 3D Envelope & Wax Seal */
+.envelope-wrapper {
+  position: relative;
+  width: 260px;
+  height: 180px;
+  margin: 15px auto;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #F2ECE4;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(197, 168, 128, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.envelope-wrapper:hover .envelope {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(184, 150, 108, 0.22);
+}
+
+/* Flap va bezaklar */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 130px solid transparent;
+  border-right: 130px solid transparent;
+  border-top: 95px solid #E6DDD0;
+  transform-origin: top;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 3;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.06));
+}
+
+.envelope-pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 130px solid #EFE8DD;
+  border-right: 130px solid #EFE8DD;
+  border-bottom: 95px solid #E5DCCF;
+  z-index: 2;
+}
+
+.envelope-paper {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  width: 230px;
+  height: 140px;
+  background: #FAF7F2;
+  border-radius: 6px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--gold-light);
+  padding: 10px;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.envelope-paper-monogram {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--gold-dark);
+}
+
+.envelope-paper-text {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+/* Wax Seal (Mumli muhr) */
+.wax-seal {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 54px;
+  height: 54px;
+  background: var(--seal-gradient);
+  border-radius: 50%;
+  z-index: 4;
+  box-shadow: 0 4px 15px rgba(140, 40, 37, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  animation: pulseSeal 2.5s infinite ease-in-out;
+}
+
+.wax-seal::before {
+  content: '';
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 230, 200, 0.4);
+  border-radius: 50%;
+}
+
+.wax-seal-icon {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFF2E8;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes pulseSeal {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.08);
+    box-shadow: 0 8px 25px rgba(140, 40, 37, 0.55), 0 0 15px rgba(214, 186, 150, 0.5);
+  }
+}
+
+/* Konvert ochilish holati */
+.envelope-wrapper.opening .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.envelope-wrapper.opening .wax-seal {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.6);
+}
+
+.envelope-wrapper.opening .envelope-paper {
+  transform: translateY(-50px);
+}
+
+/* Ochish tugmasi */
+.btn-open-gate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--gold-gradient);
+  color: #FFFFFF;
+  border: none;
+  padding: 14px 32px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(184, 150, 108, 0.35);
+  transition: var(--transition-smooth);
+}
+
+.btn-open-gate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(184, 150, 108, 0.45);
+}
+
+.btn-open-gate svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.btn-open-gate:hover svg {
+  transform: translateX(3px);
+}
+
+.intro-footer-note {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   2-BOSQICH: ASOSIY TAKLIFNOMA SAHIFASI
+   ========================================================================== */
+.main-invitation {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  padding-bottom: 60px;
+}
+
+.main-invitation.visible {
+  opacity: 1;
+}
+
+/* Blok umumiy stillari */
+.section-block {
+  padding: 36px 20px;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.section-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px auto 0;
+  color: var(--gold-primary);
+  width: 140px;
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+}
+
+/* ==========================================================================
+   HERO BLOK
+   ========================================================================== */
+.hero-section {
+  text-align: center;
+  padding: 40px 20px 20px;
+  position: relative;
+}
+
+.hero-monogram {
+  font-family: var(--font-script);
+  font-size: 2.8rem;
+  color: var(--gold-dark);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.hero-invitation-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  background: rgba(228, 211, 188, 0.25);
+  border: 1px solid var(--gold-light);
+  padding: 4px 16px;
+  border-radius: var(--radius-full);
+  margin-bottom: 16px;
+}
+
+.hero-names {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.hero-names span.ampersand {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 2.6rem;
+  color: var(--gold-primary);
+  display: inline-block;
+  margin: 0 4px;
+}
+
+/* Rasm Kartochkasi */
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 420px;
+  margin: 20px auto 24px;
+  border-radius: 160px 160px 20px 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 4px solid #FFFFFF;
+}
+
+.hero-image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid var(--gold-light);
+  pointer-events: none;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s ease;
+}
+
+.hero-image-wrapper:hover .hero-image {
+  transform: scale(1.03);
+}
+
+.hero-date-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-top: 8px;
+}
+
+.hero-date-dot {
+  width: 5px;
+  height: 5px;
+  background-color: var(--gold-primary);
+  border-radius: 50%;
+}
+
+/* ==========================================================================
+   PERSONALIZED GREETING & HOST MESSAGE
+   ========================================================================== */
+.message-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  padding: 28px 22px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(228, 211, 188, 0.4);
+  text-align: center;
+  position: relative;
+}
+
+.guest-personalized-box {
+  background: rgba(228, 211, 188, 0.2);
+  border: 1px solid var(--gold-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+
+.guest-greeting-label {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-weight: 600;
+}
+
+.guest-name-highlight {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 2px;
+}
+
+.romantic-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  margin-bottom: 18px;
+  position: relative;
+  padding: 0 10px;
+}
+
+.main-invitation-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.host-sign {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold-dark);
+}
+
+/* ==========================================================================
+   COUNTDOWN TIMER & KALENDARGA QO'SHISH
+   ========================================================================== */
+.countdown-section {
+  text-align: center;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 20px 0 24px;
+}
+
+.countdown-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  padding: 14px 4px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(228, 211, 188, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.countdown-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--gold-gradient);
+}
+
+.countdown-number {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* Kalendar tugmalari */
+.calendar-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-calendar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  flex: 1;
+  min-width: 150px;
+}
+
+.btn-calendar-google {
+  background: #FFFFFF;
+  color: var(--text-dark);
+  border: 1px solid #E0D6C8;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-calendar-google:hover {
+  background: #FAF7F2;
+  border-color: var(--gold-primary);
+  transform: translateY(-2px);
+}
+
+.btn-calendar-apple {
+  background: var(--gold-gradient);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-calendar-apple:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.btn-calendar svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ==========================================================================
+   TIMELINE (KUN TARTIBI)
+   ========================================================================== */
+.timeline-container {
+  position: relative;
+  padding-left: 28px;
+  margin-top: 10px;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 15px;
+  bottom: 15px;
+  left: 11px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-light) 100%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-node {
+  position: absolute;
+  left: -28px;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  background: var(--bg-primary);
+  border: 2px solid var(--gold-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  z-index: 2;
+}
+
+.timeline-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  border: 1px solid rgba(228, 211, 188, 0.4);
+  box-shadow: var(--shadow-sm);
+}
+
+.timeline-time {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gold-dark);
+  letter-spacing: 1px;
+}
+
+.timeline-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 2px 0 4px;
+}
+
+.timeline-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   DRESS CODE (DRES-KOD)
+   ========================================================================== */
+.dresscode-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  border: 1px solid rgba(228, 211, 188, 0.4);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.dresscode-badge {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--gold-dark);
+  margin-bottom: 8px;
+}
+
+.dresscode-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.dresscode-swatches {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.swatch-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border: 2px solid #FFFFFF;
+  transition: transform 0.3s ease;
+}
+
+.swatch-item:hover .swatch-circle {
+  transform: scale(1.15);
+}
+
+.swatch-name {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   LOKATSIYA VA XARITALAR
+   ========================================================================== */
+.venue-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(228, 211, 188, 0.4);
+  box-shadow: var(--shadow-sm);
+}
+
+.venue-image-banner {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.venue-details {
+  padding: 22px 20px;
+  text-align: center;
+}
+
+.venue-name {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.venue-hall {
+  font-size: 0.82rem;
+  color: var(--gold-dark);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.venue-address {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.venue-landmark {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+/* Navigatsiya tugmalari */
+.map-buttons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.btn-yandex-taxi {
+  background: #FC3F1D;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(252, 63, 29, 0.25);
+}
+
+.btn-yandex-taxi:hover {
+  background: #E03517;
+  transform: translateY(-2px);
+}
+
+.btn-yandex-maps {
+  background: #FFF;
+  color: #212121;
+  border: 1px solid #E6E6E6;
+}
+
+.btn-yandex-maps:hover {
+  border-color: #FC3F1D;
+  transform: translateY(-2px);
+}
+
+.btn-google-maps {
+  background: #FFF;
+  color: #212121;
+  border: 1px solid #E6E6E6;
+}
+
+.btn-google-maps:hover {
+  border-color: #4285F4;
+  transform: translateY(-2px);
+}
+
+.btn-2gis {
+  background: #00B140;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 177, 64, 0.2);
+}
+
+.btn-2gis:hover {
+  background: #009937;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   RSVP (TASHRIFNI TASDIQLASH VA TILAKLAR)
+   ========================================================================== */
+.rsvp-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  padding: 28px 20px;
+  border: 1px solid rgba(228, 211, 188, 0.5);
+  box-shadow: var(--shadow-md);
+}
+
+.rsvp-intro {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 22px;
+}
+
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  letter-spacing: 0.5px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #E5DCD2;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.2);
+  background: #FFFFFF;
+}
+
+.form-textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* Attendance Radio Cards */
+.attendance-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.attendance-option {
+  position: relative;
+}
+
+.attendance-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.attendance-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 8px;
+  background: #FFFFFF;
+  border: 1px solid #E5DCD2;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  transition: var(--transition-smooth);
+}
+
+.attendance-label .opt-icon {
+  font-size: 1.25rem;
+}
+
+.attendance-option input[type="radio"]:checked + .attendance-label {
+  border-color: var(--gold-dark);
+  background: rgba(228, 211, 188, 0.25);
+  box-shadow: 0 2px 8px rgba(197, 168, 128, 0.25);
+  font-weight: 600;
+}
+
+/* Submit Button */
+.btn-submit-rsvp {
+  background: var(--gold-gradient);
+  color: #FFFFFF;
+  border: none;
+  padding: 15px 24px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(184, 150, 108, 0.35);
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.btn-submit-rsvp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(184, 150, 108, 0.45);
+}
+
+.btn-submit-rsvp:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   FOOTER SECTION
+   ========================================================================== */
+.footer-section {
+  text-align: center;
+  padding: 30px 20px 40px;
+}
+
+.footer-monogram {
+  font-family: var(--font-script);
+  font-size: 2.4rem;
+  color: var(--gold-dark);
+}
+
+.footer-names {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.footer-thanks {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   FLOATING ELEMENTS (MUSIQA PLEYERI & SCROLL TOP)
+   ========================================================================== */
+.floating-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.floating-music-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-card-hover);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--gold-light);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--gold-dark);
+  transition: var(--transition-bounce);
+}
+
+.floating-music-btn.playing {
+  animation: rotateDisk 6s linear infinite;
+  box-shadow: 0 0 15px rgba(214, 186, 150, 0.6);
+}
+
+.floating-music-btn.muted {
+  opacity: 0.6;
+  animation-play-state: paused;
+}
+
+@keyframes rotateDisk {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.floating-music-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.floating-rsvp-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gold-gradient);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+}
+
+.floating-rsvp-btn:hover {
+  transform: scale(1.1);
+}
+
+.floating-rsvp-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==========================================================================
+   SUCCESS MODAL & CELEBRATION
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 38, 37, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: var(--transition-smooth);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.modal-card {
+  background: #FAF7F2;
+  border-radius: var(--radius-md);
+  padding: 32px 24px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--gold-light);
+  transform: scale(0.9);
+  transition: var(--transition-bounce);
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1);
+}
+
+.modal-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  display: inline-block;
+  animation: heartBeat 1.5s infinite ease-in-out;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.modal-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.btn-close-modal {
+  background: var(--gold-gradient);
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.btn-close-modal:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ==========================================================================
+   SCROLL REVEAL ANIMATSIYALARI
+   ========================================================================== */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}

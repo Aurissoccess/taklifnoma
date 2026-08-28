@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sardorbek & Madinabonu — Nikoh To‘yiga Taklifnoma</title>
+  
+  <!-- SEO & OpenGraph Meta Tags (Telegram, WhatsApp, Instagram preview) -->
+  <meta name="description" content="Sizni hayotimizdagi eng quvonchli kun — visol oqshomimizning aziz va qadrli mehmoni bo‘lishga lutfan taklif etamiz.">
+  <meta name="keywords" content="taklifnoma, wedding invitation, online taklifnoma, to'y, nikoh to'yi">
+  <meta name="author" content="Sardorbek & Madinabonu">
+  <meta name="theme-color" content="#FAF7F2">
+
+  <!-- Open Graph / Facebook / Telegram / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://taklifnoma.uz">
+  <meta property="og:title" content="Sardorbek & Madinabonu — Nikoh To‘yiga Taklifnoma 💍">
+  <meta property="og:description" content="Sizni qutlug' visol oqshomimizning aziz mehmoni bo‘lishga lutfan taklif etamiz.">
+  <meta property="og:image" content="assets/images/banner.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Sardorbek & Madinabonu — Nikoh To‘yiga Taklifnoma">
+  <meta property="twitter:description" content="Sizni visol oqshomimizning aziz mehmoni bo‘lishga taklif etamiz.">
+  <meta property="twitter:image" content="assets/images/banner.jpg">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Fon effekti: Atirgul barglari va nurlar canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Mobil Qurilmalarga Moslangan Asosiy Konteyner -->
+  <div class="app-container">
+
+    <!-- ==========================================================================
+         1-BOSQICH: INTERAKTIV KIRISH QATLAMI ("KIRISH ESHIGI" / INTRO GATE)
+         ========================================================================== -->
+    <section class="intro-gate" id="intro-gate">
+      <div class="intro-content">
+        <span class="intro-subtitle">To‘y Marosimi</span>
+        <h1 class="intro-title">Maxsus Taklifnoma</h1>
+        
+        <!-- 3D Nafis Konvert & Mumli Muhr (Wax Seal) -->
+        <div class="envelope-wrapper" id="envelope-wrapper" title="Taklifnomani ochish uchun bosing">
+          <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-paper">
+              <div class="envelope-paper-monogram cfg-monogram">S & M</div>
+              <div class="envelope-paper-text">Siz Taklif Qilindingiz</div>
+            </div>
+            <div class="envelope-pocket"></div>
+          </div>
+          <!-- Mumli Muhr (Wax Seal) -->
+          <div class="wax-seal" id="wax-seal">
+            <span class="wax-seal-icon">✦</span>
+          </div>
+        </div>
+
+        <button class="btn-open-gate" id="btn-open-gate">
+          <span>Taklifnomani Ochish</span>
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="intro-footer-note">
+          <span>🎵</span> Ochilganda yoqimli fon musiqasi yangraydi
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         2-BOSQICH: ASOSIY TAKLIFNOMA SAHIFASI
+         ========================================================================== -->
+    <main class="main-invitation" id="main-invitation">
+
+      <!-- HERO BLOK -->
+      <section class="section-block hero-section">
+        <div class="hero-monogram cfg-monogram">S & M</div>
+        <div class="hero-invitation-badge">Nikoh To‘yi</div>
+        
+        <h1 class="hero-names">
+          <span class="cfg-groom-name">Sardorbek</span>
+          <span class="ampersand">&</span>
+          <span class="cfg-bride-name">Madinabonu</span>
+        </h1>
+
+        <!-- Qahramonlar Romantik Fotosurati -->
+        <div class="hero-image-wrapper">
+          <img src="assets/images/couple.jpg?v=3" alt="Sardorbek & Madinabonu" class="hero-image">
+        </div>
+
+        <!-- Sana va Hafta kuni -->
+        <div class="hero-date-badge">
+          <span class="cfg-date-formatted">18-Oktyabr, 2026</span>
+          <span class="hero-date-dot"></span>
+          <span class="cfg-day-of-week">Yakshanba</span>
+        </div>
+      </section>
+
+      <!-- SHAXSIY MUROJAAT VA MEZBONLAR DILTORLAR SO'ZLARI -->
+      <section class="section-block reveal-on-scroll">
+        <div class="message-card">
+          
+          <!-- Shaxsiy Murojaat (URL ?guest=... parametri orqali) -->
+          <div class="guest-personalized-box" id="guest-personalized-box" style="display: none;">
+            <div class="guest-greeting-label">Hurmatli va Qadrli Mehmonimiz</div>
+            <div class="guest-name-highlight" id="guest-name-highlight">Aziz Mehmonimiz!</div>
+          </div>
+
+          <div class="ornament-divider">✦</div>
+          <p class="romantic-quote cfg-quote">
+            “Ikki qalbning sevgisi va hurmati bir butun bo‘lib, yangi oila deb atalmish muqaddas ostonaga qadam qo‘ymoqdamiz.”
+          </p>
+
+          <p class="main-invitation-text cfg-host-message">
+            Qadrli va muhtaram mehmonimiz! Sizni hayotimizdagi eng quvonchli va unutilmas lahzalar — visol oqshomimizning aziz mehmoni bo‘lishga lutfan taklif etamiz. Sizning tashrifingiz bizga katta baxt va quvonch bag‘ishlaydi.
+          </p>
+
+          <div class="host-sign cfg-hosts">
+            Hurmat bilan: Rahimovlar va Karimovlar xonadoni
+          </div>
+        </div>
+      </section>
+
+      <!-- COUNTDOWN TAYMER & KALENDARGA QO'SHISH -->
+      <section class="section-block countdown-section reveal-on-scroll">
+        <div class="section-header">
+          <span class="section-subtitle">Kutilayotgan Lahzalar</span>
+          <h2 class="section-title">To‘ygacha Qolgan Vaqt</h2>
+          <div class="ornament-divider">✦</div>
+        </div>
+
+        <!-- 4 xil taymer kartochkasi -->
+        <div class="countdown-grid">
+          <div class="countdown-card">
+            <div class="countdown-number" id="countdown-days">00</div>
+            <div class="countdown-label">Kun</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-number" id="countdown-hours">00</div>
+            <div class="countdown-label">Soat</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-number" id="countdown-mins">00</div>
+            <div class="countdown-label">Daqiqa</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-number" id="countdown-secs">00</div>
+            <div class="countdown-label">Soniya</div>
+          </div>
+        </div>
+
+        <!-- Kalendarga qo'shish harakatlari -->
+        <div class="calendar-actions">
+          <a href="#" id="btn-calendar-google" class="btn-calendar btn-calendar-google" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+            </svg>
+            Google Kalendar
+          </a>
+          <a href="#" id="btn-calendar-apple" class="btn-calendar btn-calendar-apple">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+            </svg>
+            Apple Kalendar (.ics)
+          </a>
+        </div>
+      </section>
+
+      <!-- KUN TARTIBI (TIMELINE) -->
+      <section class="section-block reveal-on-scroll">
+        <div class="section-header">
+          <span class="section-subtitle">Dastur Rejasi</span>
+          <h2 class="section-title">Kun Tartibi</h2>
+          <div class="ornament-divider">✦</div>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+          <div id="timeline-list">
+            <!-- JavaScript orqali to'ldiriladi -->
+          </div>
+        </div>
+      </section>
+
+      <!-- DRES-KOD (DRESS CODE) -->
+      <section class="section-block reveal-on-scroll">
+        <div class="section-header">
+          <span class="section-subtitle">Tashqi Ko‘rinish</span>
+          <h2 class="section-title">Dres-kod</h2>
+          <div class="ornament-divider">✦</div>
+        </div>
+
+        <div class="dresscode-card">
+          <div class="dresscode-badge" id="dresscode-title">Black Tie & Romantic Pastel</div>
+          <p class="dresscode-text" id="dresscode-desc">
+            Bizning bayramimizga yanada ko‘rk bag‘ishlash uchun pastel va klassik ohanglardagi liboslarni tanlashingizni iltimos qilamiz.
+          </p>
+
+          <!-- Ranglar doirachalari -->
+          <div class="dresscode-swatches" id="dresscode-swatches">
+            <!-- JavaScript orqali to'ldiriladi -->
+          </div>
+        </div>
+      </section>
+
+      <!-- LOKATSIYA VA MANZIL BLOKI -->
+      <section class="section-block reveal-on-scroll">
+        <div class="section-header">
+          <span class="section-subtitle">To‘y Manzili</span>
+          <h2 class="section-title">Lokatsiya & Xarita</h2>
+          <div class="ornament-divider">✦</div>
+        </div>
+
+        <div class="venue-card">
+          <img src="assets/images/banner.jpg" alt="Versal Celebration Hall" class="venue-image-banner">
+          
+          <div class="venue-details">
+            <h3 class="venue-name cfg-venue-name">«Versal Celebration Hall»</h3>
+            <div class="venue-hall cfg-venue-hall">Katta Marosimlar Zali</div>
+            <p class="venue-address cfg-venue-address">Toshkent shahri, Yunusobod tumani, Amir Temur ko‘chasi, 107-A uy</p>
+            <p class="venue-landmark cfg-venue-landmark">Mo‘ljal: Yunusobod metrosi, «Oazis» savdo markazi ro‘parasi</p>
+
+            <!-- Xarita va Taksi tugmalari -->
+            <div class="map-buttons-grid">
+              <a href="#" id="btn-yandex-taxi" class="btn-map btn-yandex-taxi" target="_blank">
+                <span>🚕</span> Yandex Go orqali Taksi Chaqirish
+              </a>
+              <a href="#" id="btn-yandex-maps" class="btn-map btn-yandex-maps" target="_blank">
+                <span>🗺️</span> Yandex Xaritada Ochish
+              </a>
+              <a href="#" id="btn-google-maps" class="btn-map btn-google-maps" target="_blank">
+                <span>📍</span> Google Maps orqali Ko‘rish
+              </a>
+              <a href="#" id="btn-2gis" class="btn-map btn-2gis" target="_blank">
+                <span>🟢</span> 2GIS Xaritada Ochish
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP (TASHRIFNI TASDIQLASH VA TILAKLAR) -->
+      <section class="section-block reveal-on-scroll" id="rsvp-section">
+        <div class="section-header">
+          <span class="section-subtitle">Tashrifingiz Biz Uchun Muhim</span>
+          <h2 class="section-title">Tashrifni Tasdiqlash</h2>
+          <div class="ornament-divider">✦</div>
+        </div>
+
+        <div class="rsvp-card">
+          <p class="rsvp-intro">
+            Iltimos, bayramimizda ishtirok eta olishingizni oldindan ma'lum qiling va samimiy tilaklaringizni yozib qoldiring.
+          </p>
+
+          <form id="rsvp-form" class="rsvp-form">
+            <!-- Ism familiya -->
+            <div class="form-group">
+              <label for="rsvp-name" class="form-label">Ism va Familiyangiz *</label>
+              <input type="text" id="rsvp-name" class="form-input" placeholder="Masalan: Sardorbek Rahimov" required>
+            </div>
+
+            <!-- Tashrif varianti -->
+            <div class="form-group">
+              <label class="form-label">Tashrifingizni tasdiqlang *</label>
+              <div class="attendance-options">
+                <label class="attendance-option">
+                  <input type="radio" name="attendance" value="Albatta boraman ✨" checked>
+                  <span class="attendance-label">
+                    <span class="opt-icon">✨</span>
+                    <span>Albatta boraman</span>
+                  </span>
+                </label>
+                <label class="attendance-option">
+                  <input type="radio" name="attendance" value="Afsuski, kela olmayman 🕊️">
+                  <span class="attendance-label">
+                    <span class="opt-icon">🕊️</span>
+                    <span>Kela olmayman</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Mehmonlar soni -->
+            <div class="form-group">
+              <label for="rsvp-guests" class="form-label">Tashrif buyuruvchilar soni</label>
+              <select id="rsvp-guests" class="form-select">
+                <option value="1 kishi">1 kishi</option>
+                <option value="2 kishi (+1)">2 kishi (+1)</option>
+                <option value="Oila a'zolari bilan">Oila a'zolari bilan</option>
+              </select>
+            </div>
+
+            <!-- Ezgu tilaklar -->
+            <div class="form-group">
+              <label for="rsvp-message" class="form-label">Ezgu Tilaklaringiz</label>
+              <textarea id="rsvp-message" class="form-textarea" placeholder="Yangi oilaga samimiy tilaklaringizni yozing..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit-rsvp">
+              <span>Yuborish</span>
+              <span>✨</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer-section reveal-on-scroll">
+        <div class="footer-monogram cfg-monogram">S & M</div>
+        <div class="footer-names">
+          <span class="cfg-groom-name">Sardorbek</span> & <span class="cfg-bride-name">Madinabonu</span>
+        </div>
+        <p class="footer-thanks">Tashrifingiz uchun minnatdormiz!</p>
+      </footer>
+
+    </main>
+
+    <!-- ==========================================================================
+         SUZUVCHI BOSHQARUV ELEMENTLARI (FLOATING CONTROLS)
+         ========================================================================== -->
+    <div class="floating-controls">
+      <!-- Fon Musiqasi Boshqaruvi -->
+      <button class="floating-music-btn" id="floating-music-btn" title="Musiqani yoqish/o'chirish">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+      </button>
+
+      <!-- Tezkor RSVP tugmasi -->
+      <a href="#rsvp-section" class="floating-rsvp-btn" title="Tashrifni tasdiqlashga o'tish">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </a>
+    </div>
+
+    <!-- ==========================================================================
+         SUCCESS MODAL & TABRIK XABARI
+         ========================================================================== -->
+    <div class="modal-overlay" id="success-modal">
+      <div class="modal-card">
+        <div class="modal-icon">💖</div>
+        <h3 class="modal-title">Tashakkur!</h3>
+        <p class="modal-text">
+          Javobingiz va samimiy tilaklaringiz qabul qilindi. Sizni baxtli kunimizda intizorlik bilan kutamiz!
+        </p>
+        <button class="btn-close-modal" id="btn-close-modal">Yopish</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript fayllar -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
