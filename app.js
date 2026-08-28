@@ -666,7 +666,7 @@ function initRsvpForm() {
 }
 
 /* ==========================================================================
-   11. TO'YONA & TO'LOV TIZIMLARI (CARD COPY & PAYMENT APPS)
+   11. TO'YONA & TO'LOV TIZIMLARI (CARD AUTO-COPY & APP DEEP LINKS)
    ========================================================================== */
 function initToyonaPayment() {
   const cfg = WEDDING_CONFIG.toyona;
@@ -676,23 +676,92 @@ function initToyonaPayment() {
   const cardNumberEl = document.getElementById('card-number-text');
   const btnCopyCard = document.getElementById('btn-copy-card');
   const copyBtnText = document.getElementById('copy-btn-text');
+  const cleanNum = cfg.cardNumberClean || cfg.cardNumber.replace(/\s+/g, '');
 
   if (cardHolderEl && cfg.cardHolder) cardHolderEl.textContent = cfg.cardHolder;
   if (cardNumberEl && cfg.cardNumber) cardNumberEl.textContent = cfg.cardNumber;
 
+  function copyCardWithFeedback(customMsg = "Nusxalandi! ✨") {
+    navigator.clipboard.writeText(cleanNum).then(() => {
+      if (copyBtnText) {
+        copyBtnText.textContent = customMsg;
+        setTimeout(() => {
+          copyBtnText.textContent = "Karta raqamini nusxalash";
+        }, 3000);
+      }
+    }).catch(() => {
+      // Fallback
+      const tempInput = document.createElement("input");
+      tempInput.value = cleanNum;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      if (copyBtnText) {
+        copyBtnText.textContent = customMsg;
+        setTimeout(() => {
+          copyBtnText.textContent = "Karta raqamini nusxalash";
+        }, 3000);
+      }
+    });
+  }
+
   if (btnCopyCard) {
-    btnCopyCard.addEventListener('click', () => {
-      const cleanNum = cfg.cardNumberClean || cfg.cardNumber.replace(/\s+/g, '');
-      navigator.clipboard.writeText(cleanNum).then(() => {
-        if (copyBtnText) {
-          copyBtnText.textContent = "Nusxalandi! ✨";
-          setTimeout(() => {
-            copyBtnText.textContent = "Karta raqamini nusxalash";
-          }, 2500);
-        }
-      }).catch(() => {
-        alert("Karta raqami: " + cleanNum);
-      });
+    btnCopyCard.addEventListener('click', (e) => {
+      e.preventDefault();
+      copyCardWithFeedback("Nusxalandi! ✨");
+    });
+  }
+
+  // Payme, Click, Uzum, Paynet tugmalarini bosganda avtomatik karta nusxalanadi va ilova ochiladi
+  const btnPayme = document.querySelector('.btn-payme');
+  const btnClick = document.querySelector('.btn-click');
+  const btnUzum = document.querySelector('.btn-uzum');
+  const btnPaynet = document.querySelector('.btn-paynet');
+
+  if (btnPayme) {
+    btnPayme.addEventListener('click', (e) => {
+      e.preventDefault();
+      copyCardWithFeedback("Karta nusxalandi! Payme ochilmoqda...");
+      setTimeout(() => {
+        window.location.href = `https://payme.uz/fallback/pay/card/${cleanNum}`;
+      }, 400);
+    });
+  }
+
+  if (btnClick) {
+    btnClick.addEventListener('click', (e) => {
+      e.preventDefault();
+      copyCardWithFeedback("Karta nusxalandi! Click ochilmoqda...");
+      setTimeout(() => {
+        window.location.href = `https://my.click.uz/clickp2p?receiver=${cleanNum}`;
+      }, 400);
+    });
+  }
+
+  if (btnUzum) {
+    btnUzum.addEventListener('click', (e) => {
+      e.preventDefault();
+      copyCardWithFeedback("Karta nusxalandi! Uzum Bank ochilmoqda...");
+      setTimeout(() => {
+        window.location.href = `uzumbank://`;
+        setTimeout(() => {
+          window.open("https://uzumbank.uz", "_blank");
+        }, 800);
+      }, 400);
+    });
+  }
+
+  if (btnPaynet) {
+    btnPaynet.addEventListener('click', (e) => {
+      e.preventDefault();
+      copyCardWithFeedback("Karta nusxalandi! Paynet ochilmoqda...");
+      setTimeout(() => {
+        window.location.href = `paynet://`;
+        setTimeout(() => {
+          window.open("https://paynet.uz", "_blank");
+        }, 800);
+      }, 400);
     });
   }
 }
