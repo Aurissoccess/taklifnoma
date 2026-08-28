@@ -713,19 +713,22 @@ function initToyonaPayment() {
     });
   }
 
-  // Payme, Click, Uzum, Paynet tugmalarini bosganda avtomatik karta nusxalanadi va ilova ochiladi
+  // Payme, Click, Uzum, Paynet, Xazna ilovalarini avtonom ochish
   const btnPayme = document.querySelector('.btn-payme');
   const btnClick = document.querySelector('.btn-click');
   const btnUzum = document.querySelector('.btn-uzum');
   const btnPaynet = document.querySelector('.btn-paynet');
+  const btnXazna = document.querySelector('.btn-xazna');
 
   if (btnPayme) {
     btnPayme.addEventListener('click', (e) => {
       e.preventDefault();
       copyCardWithFeedback("Karta nusxalandi! Payme ochilmoqda...");
+      // Payme ilovasiga o'tish
+      window.location.href = `payme://p2p?card=${cleanNum}`;
       setTimeout(() => {
         window.location.href = `https://payme.uz/fallback/pay/card/${cleanNum}`;
-      }, 400);
+      }, 500);
     });
   }
 
@@ -733,9 +736,11 @@ function initToyonaPayment() {
     btnClick.addEventListener('click', (e) => {
       e.preventDefault();
       copyCardWithFeedback("Karta nusxalandi! Click ochilmoqda...");
+      // Click ilovasiga o'tish
+      window.location.href = `clickuz://p2p?card=${cleanNum}`;
       setTimeout(() => {
         window.location.href = `https://my.click.uz/clickp2p?receiver=${cleanNum}`;
-      }, 400);
+      }, 500);
     });
   }
 
@@ -743,12 +748,8 @@ function initToyonaPayment() {
     btnUzum.addEventListener('click', (e) => {
       e.preventDefault();
       copyCardWithFeedback("Karta nusxalandi! Uzum Bank ochilmoqda...");
-      setTimeout(() => {
-        window.location.href = `uzumbank://`;
-        setTimeout(() => {
-          window.open("https://uzumbank.uz", "_blank");
-        }, 800);
-      }, 400);
+      // Uzum Bank ilovasiga to'g'ridan-to'g'ri o'tish
+      window.location.href = `uzumbank://`;
     });
   }
 
@@ -756,12 +757,17 @@ function initToyonaPayment() {
     btnPaynet.addEventListener('click', (e) => {
       e.preventDefault();
       copyCardWithFeedback("Karta nusxalandi! Paynet ochilmoqda...");
-      setTimeout(() => {
-        window.location.href = `paynet://`;
-        setTimeout(() => {
-          window.open("https://paynet.uz", "_blank");
-        }, 800);
-      }, 400);
+      // Paynet ilovasiga to'g'ridan-to'g'ri o'tish
+      window.location.href = `paynet://`;
+    });
+  }
+
+  if (btnXazna) {
+    btnXazna.addEventListener('click', (e) => {
+      e.preventDefault();
+      copyCardWithFeedback("Karta nusxalandi! Xazna ochilmoqda...");
+      // Xazna ilovasiga to'g'ridan-to'g'ri o'tish
+      window.location.href = `xazna://`;
     });
   }
 }

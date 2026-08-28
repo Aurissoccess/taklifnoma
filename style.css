@@ -1423,6 +1423,10 @@ body {
   box-shadow: var(--shadow-md);
 }
 
+.btn-xazna {
+  grid-column: span 2;
+}
+
 .pay-logo-badge {
   font-family: var(--font-sans);
   font-weight: 700;
@@ -1433,11 +1437,13 @@ body {
 .click-badge { color: #0084FF; font-size: 1rem; }
 .uzum-badge { color: #7000FF; font-size: 1rem; }
 .paynet-badge { color: #00B140; font-size: 0.95rem; }
+.xazna-badge { color: #E30613; font-size: 0.95rem; }
 
 .btn-payme:hover { border-color: #00B3BA; background: #F0FBFC; }
 .btn-click:hover { border-color: #0084FF; background: #F0F7FF; }
 .btn-uzum:hover { border-color: #7000FF; background: #F7F0FF; }
 .btn-paynet:hover { border-color: #00B140; background: #F0FCF4; }
+.btn-xazna:hover { border-color: #E30613; background: #FEF0F1; }
 
 /* ==========================================================================
    SCROLL REVEAL ANIMATSIYALARI
