@@ -222,49 +222,50 @@ function initIntroGate() {
 }
 
 /* ==========================================================================
-   5. FON MUSIQASI BOSHQARUVI (WEB AUDIO SYNTH & EXTERNAL AUDIO)
+   5. FON MUSIQASI BOSHQARUVI (HTML5 AUDIO & WEB AUDIO SYNTH)
    ========================================================================== */
 let audioContext = null;
 let isMusicPlaying = false;
 let synthInterval = null;
-let customAudioEl = null;
 
 function initMusicController() {
   const musicBtn = document.getElementById('floating-music-btn');
-  if (!musicBtn) return;
+  const audioEl = document.getElementById('wedding-audio');
 
-  musicBtn.addEventListener('click', () => {
-    if (isMusicPlaying) {
-      pauseMusic();
-    } else {
-      playMusic();
-    }
-  });
+  if (audioEl) {
+    audioEl.volume = 0.8;
+  }
+
+  if (musicBtn) {
+    musicBtn.addEventListener('click', () => {
+      if (isMusicPlaying) {
+        pauseMusic();
+      } else {
+        playMusic();
+      }
+    });
+  }
 }
 
 function playMusic() {
   const musicBtn = document.getElementById('floating-music-btn');
+  const audioEl = document.getElementById('wedding-audio');
 
-  // Agar tashqi audioSrc ko'rsatilgan bo'lsa
-  if (WEDDING_CONFIG?.music?.audioSrc && WEDDING_CONFIG.music.audioSrc.trim() !== "") {
-    if (!customAudioEl) {
-      customAudioEl = new Audio(WEDDING_CONFIG.music.audioSrc);
-      customAudioEl.loop = true;
-    }
-    customAudioEl.play().then(() => {
+  if (audioEl) {
+    audioEl.play().then(() => {
       isMusicPlaying = true;
       if (musicBtn) {
         musicBtn.classList.add('playing');
         musicBtn.classList.remove('muted');
       }
-    }).catch(() => {
-      // Brauzer bloklasa sintizatordan foydalanish
+    }).catch(err => {
+      console.warn("HTML5 audio playback blocked/failed, starting Web Audio Synth fallback:", err);
       startWebAudioSynth();
     });
     return;
   }
 
-  // Web Audio sintizatori orqali mayin romantik kuy
+  // Fallback: Web Audio sintizatori
   startWebAudioSynth();
 }
 
@@ -362,18 +363,20 @@ function startWebAudioSynth() {
 function pauseMusic() {
   isMusicPlaying = false;
   const musicBtn = document.getElementById('floating-music-btn');
+  const audioEl = document.getElementById('wedding-audio');
+
   if (musicBtn) {
     musicBtn.classList.remove('playing');
     musicBtn.classList.add('muted');
   }
 
+  if (audioEl) {
+    audioEl.pause();
+  }
+
   if (synthInterval) {
     clearInterval(synthInterval);
     synthInterval = null;
-  }
-
-  if (customAudioEl) {
-    customAudioEl.pause();
   }
 
   if (audioContext && audioContext.state === 'running') {

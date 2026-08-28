@@ -101,6 +101,6 @@ const WEDDING_CONFIG = {
   // Fon musiqasi fayli yo'li
   music: {
     title: "Romantic Piano Melody",
-    audioSrc: "" // Bo'sh qoldirilsa avtomatik real-time Web Audio pianino arpejio sadolanadi
+    audioSrc: "assets/audio/wedding_music.wav"
   }
 };
