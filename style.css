@@ -1406,28 +1406,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px 10px;
+  padding: 14px 10px;
   background: #FFFFFF;
-  border: 1px solid #E5DCD2;
+  border: 1.5px solid #E5DCD2;
   border-radius: var(--radius-sm);
   text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 700;
   color: var(--text-dark);
   box-shadow: var(--shadow-sm);
   transition: var(--transition-smooth);
 }
 
 .payment-app-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
 
-.btn-payme:hover { border-color: #00CCCC; color: #009999; }
-.btn-click:hover { border-color: #F8B100; color: #D69700; }
-.btn-uzum:hover { border-color: #7000FF; color: #7000FF; }
-.btn-paynet:hover { border-color: #00B140; color: #00B140; }
+.pay-logo-badge {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.payme-badge { color: #00B3BA; font-size: 1rem; }
+.click-badge { color: #0084FF; font-size: 1rem; }
+.uzum-badge { color: #7000FF; font-size: 1rem; }
+.paynet-badge { color: #00B140; font-size: 0.95rem; }
+
+.btn-payme:hover { border-color: #00B3BA; background: #F0FBFC; }
+.btn-click:hover { border-color: #0084FF; background: #F0F7FF; }
+.btn-uzum:hover { border-color: #7000FF; background: #F7F0FF; }
+.btn-paynet:hover { border-color: #00B140; background: #F0FCF4; }
 
 /* ==========================================================================
    SCROLL REVEAL ANIMATSIYALARI
